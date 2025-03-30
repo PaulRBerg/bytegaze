@@ -1,9 +1,17 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useContext } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { ThemeContext } from './ThemeContext';
 import ThemeToggle from './ThemeToggle';
-import { Clipboard, Check, Copy } from 'lucide-react';
+import { Check, Copy } from 'lucide-react';
+import ClientLayout from './ClientLayout';
+import {
+  PageWrapper, Container, Main, Header, Title, Subtitle, Description,
+  Input, ErrorBox, ChunkContainer, SelectorCard, ChunkCard, EmptyMessage,
+  FlexRow, LabelSpan, ValueContainer, SelectorValue, ChunkValue, CopyIconWrapper,
+  Footer, FooterContent, FooterLink, LinkContainer
+} from './StyledComponents';
 
 export default function Home() {
   const [input, setInput] = useState<string>('0x0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000023ffec2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000000');
@@ -13,11 +21,11 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const { currentTheme } = useContext(ThemeContext);
 
   // Set mounted to true once component mounts on client and initialize with example data
   useEffect(() => {
     setMounted(true);
-    document.body.className = 'font-[family-name:var(--font-geist-sans)]';
     // Set the initial processed input to match the default value
     setProcessedInput(input);
   }, []);
@@ -113,170 +121,160 @@ export default function Home() {
   // Return a static version before client-side hydration
   if (!mounted) {
     return (
-      <div className="min-h-screen flex flex-col bg-background text-foreground font-[family-name:var(--font-geist-sans)]">
-        <main className="container mx-auto px-4 py-16 max-w-4xl flex-grow">
-          <header className="mb-12 text-center">
-            <h1 className="text-4xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
-              ByteGaze
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400">Ethereum ABI Data Visualizer</p>
-          </header>
-          <div className="flex justify-center py-8">Loading...</div>
-        </main>
-        <footer className="py-6 border-t border-gray-200 dark:border-gray-800 w-full">
-          <div className="container mx-auto px-4 flex justify-between items-center text-gray-500 dark:text-gray-400 text-sm">
-            <div>Created by Paul Berg</div>
-            <a href="https://github.com/PaulRBerg/bytegaze" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">GitHub</a>
-          </div>
-        </footer>
-      </div>
+      <ClientLayout>
+        <PageWrapper>
+          <Main>
+            <Container>
+              <Header>
+                <Title>ByteGaze</Title>
+                <Subtitle>Ethereum ABI Data Visualizer</Subtitle>
+              </Header>
+              <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem 0' }}>Loading...</div>
+            </Container>
+          </Main>
+          <Footer>
+            <Container>
+              <FooterContent>
+                <div>Created by Paul Berg</div>
+                <FooterLink href="https://github.com/PaulRBerg/bytegaze" target="_blank" rel="noopener noreferrer">
+                  GitHub
+                </FooterLink>
+              </FooterContent>
+            </Container>
+          </Footer>
+        </PageWrapper>
+      </ClientLayout>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col font-[family-name:var(--font-geist-sans)]">
-      <div className="container mx-auto px-4 max-w-4xl relative pt-4">
-        <div className="absolute top-4 right-4 z-10">
-          <ThemeToggle />
-        </div>
-      </div>
-
-      <main className="container mx-auto px-4 py-16 max-w-4xl flex-grow">
-        <header className="mb-12 text-center">
-          <h1 className="text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
-            ByteGaze
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-3 font-medium">Ethereum ABI Data Visualizer</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            Paste any Ethereum transaction data or method call payload to analyze it. ByteGaze detects 4-byte function selectors
-            and splits the rest into 32-byte chunks for easier analysis.
-            Useful for debugging smart contract interactions and inspecting transaction data.
-          </p>
-        </header>
-
-        <div className="mb-8">
-          <input
-            type="text"
-            value={input}
-            onChange={handleInputChange}
-            placeholder="Enter ABI-encoded data (0x...)"
-            className="w-full p-3 rounded-lg bg-card-bg dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700/30 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-300 dark:focus:border-blue-500 transition-all font-[family-name:var(--font-geist-mono)] shadow-sm"
-          />
-        </div>
-
-        {error && (
-          <div className="p-4 mb-6 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-800 rounded-lg text-red-800 dark:text-red-300">
-            {error}
+    <ClientLayout>
+      <PageWrapper>
+        <Container style={{ position: 'relative', paddingTop: '1rem' }}>
+          <div style={{ position: 'absolute', top: '1rem', right: '1rem', zIndex: 10 }}>
+            <ThemeToggle />
           </div>
-        )}
+        </Container>
 
-        <div className="space-y-2">
-          <AnimatePresence>
-            {/* Function Selector if present */}
-            {functionSelector && (
-              <motion.div
-                key="selector"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="p-3 bg-violet-100/90 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800/40 rounded-lg font-[family-name:var(--font-geist-mono)] text-sm break-all shadow-sm hover:shadow transition-shadow cursor-pointer"
-                onClick={() => {
-                  navigator.clipboard.writeText(functionSelector);
-                  setCopiedIndex(-1); // Special index for selector
-                  setTimeout(() => {
-                    setCopiedIndex(null);
-                  }, 2000);
-                }}
-              >
-                <div className="flex items-start gap-2">
-                  <span className="text-gray-700 dark:text-gray-300 shrink-0">
-                    Function Selector:
-                  </span>
-                  <div className="flex-grow relative flex items-start">
-                    <span className="text-violet-700 dark:text-violet-400 font-mono pr-8">{functionSelector}</span>
-                    <div className="absolute right-0 top-[-2px] p-1 text-gray-500 hover:text-primary">
-                      {copiedIndex === -1 ? (
-                        <Check size={18} className="text-black dark:text-white" />
-                      ) : (
-                        <Copy size={18} />
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
+        <Main>
+          <Container>
+            <Header>
+              <Title>ByteGaze</Title>
+              <Subtitle>Ethereum ABI Data Visualizer</Subtitle>
+              <Description>
+                Paste any Ethereum transaction data or method call payload to analyze it. ByteGaze detects 4-byte function selectors
+                and splits the rest into 32-byte chunks for easier analysis.
+                Useful for debugging smart contract interactions and inspecting transaction data.
+              </Description>
+            </Header>
 
-            {/* 32-byte chunks */}
-            {chunks.map((chunk, index) => (
-              <motion.div
-                key={`chunk-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="p-3 bg-card-bg border border-gray-200 rounded-lg font-[family-name:var(--font-geist-mono)] text-sm break-all shadow-sm hover:shadow transition-shadow cursor-pointer"
-                onClick={() => {
-                  navigator.clipboard.writeText(chunk);
-                  setCopiedIndex(index);
-                  setTimeout(() => {
-                    setCopiedIndex(null);
-                  }, 2000);
-                }}
-              >
-                <div className="flex items-start gap-2">
-                  <span className="text-gray-500 dark:text-gray-400 shrink-0 w-16">
-                    Chunk {index}:
-                  </span>
-                  <div className="flex-grow relative flex items-start">
-                    <span className="text-emerald-600 dark:text-emerald-400 font-mono pr-8 break-all">{chunk}</span>
-                    <div className="absolute right-0 top-[-2px] p-1 text-gray-500 hover:text-primary">
-                      {copiedIndex === index ? (
-                        <Check size={18} className="text-black dark:text-white" />
-                      ) : (
-                        <Copy size={18} />
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+            <Input
+              type="text"
+              value={input}
+              onChange={handleInputChange}
+              placeholder="Enter ABI-encoded data (0x...)"
+            />
 
-          {/* No data message */}
-          {!error && functionSelector === null && chunks.length === 0 && processedInput && (
-            <div className="p-4 text-center text-gray-500 dark:text-gray-400">
-              No valid Ethereum calldata to display
-            </div>
-          )}
-        </div>
-      </main>
+            {error && <ErrorBox>{error}</ErrorBox>}
 
-      <footer className="py-6 border-t border-gray-200 dark:border-gray-700 w-full">
-        <div className="container mx-auto px-4 flex justify-between items-center text-gray-500 dark:text-gray-400 text-sm">
-          <div>
-            Created by Paul Berg
-          </div>
-          <div className="flex space-x-6">
-            <a
-              href="https://docs.soliditylang.org/en/develop/abi-spec.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary-hover hover:underline transition-colors"
-            >
-              ABI Spec
-            </a>
-            <a
-              href="https://github.com/PaulRBerg/bytegaze"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary-hover transition-colors"
-            >
-              Source Code
-            </a>
-          </div>
-        </div>
-      </footer>
-    </div>
+            <ChunkContainer>
+              <AnimatePresence>
+                {/* Function Selector if present */}
+                {functionSelector && (
+                  <SelectorCard
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={() => {
+                      navigator.clipboard.writeText(functionSelector);
+                      setCopiedIndex(-1); // Special index for selector
+                      setTimeout(() => {
+                        setCopiedIndex(null);
+                      }, 2000);
+                    }}
+                  >
+                    <FlexRow>
+                      <LabelSpan>Function Selector:</LabelSpan>
+                      <ValueContainer>
+                        <SelectorValue>{functionSelector}</SelectorValue>
+                        <CopyIconWrapper>
+                          {copiedIndex === -1 ? (
+                            <Check size={18} />
+                          ) : (
+                            <Copy size={18} />
+                          )}
+                        </CopyIconWrapper>
+                      </ValueContainer>
+                    </FlexRow>
+                  </SelectorCard>
+                )}
+
+                {/* 32-byte chunks */}
+                {chunks.map((chunk, index) => (
+                  <ChunkCard
+                    key={`chunk-${index}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    onClick={() => {
+                      navigator.clipboard.writeText(chunk);
+                      setCopiedIndex(index);
+                      setTimeout(() => {
+                        setCopiedIndex(null);
+                      }, 2000);
+                    }}
+                  >
+                    <FlexRow>
+                      <LabelSpan>Chunk {index}:</LabelSpan>
+                      <ValueContainer>
+                        <ChunkValue>{chunk}</ChunkValue>
+                        <CopyIconWrapper>
+                          {copiedIndex === index ? (
+                            <Check size={18} />
+                          ) : (
+                            <Copy size={18} />
+                          )}
+                        </CopyIconWrapper>
+                      </ValueContainer>
+                    </FlexRow>
+                  </ChunkCard>
+                ))}
+              </AnimatePresence>
+
+              {/* No data message */}
+              {!error && functionSelector === null && chunks.length === 0 && processedInput && (
+                <EmptyMessage>No valid Ethereum calldata to display</EmptyMessage>
+              )}
+            </ChunkContainer>
+          </Container>
+        </Main>
+
+        <Footer>
+          <Container>
+            <FooterContent>
+              <div>Created by Paul Berg</div>
+              <LinkContainer>
+                <FooterLink
+                  href="https://docs.soliditylang.org/en/develop/abi-spec.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  ABI Spec
+                </FooterLink>
+                <FooterLink
+                  href="https://github.com/PaulRBerg/bytegaze"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Source Code
+                </FooterLink>
+              </LinkContainer>
+            </FooterContent>
+          </Container>
+        </Footer>
+      </PageWrapper>
+    </ClientLayout>
   );
 }

@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { SunIcon, MoonIcon } from 'lucide-react';
+import { ThemeContext, ThemeProvider } from 'styled-components';
+import { ThemeToggleButton } from './StyledComponents';
+import { theme } from './GlobalStyles';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('light');
+  const themeContext = useContext(ThemeContext);
 
   useEffect(() => {
     // Check user's preferred theme on component mount
@@ -12,37 +16,25 @@ export default function ThemeToggle() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
-    setTheme(initialTheme);
-    applyTheme(initialTheme);
+    setCurrentTheme(initialTheme);
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    applyTheme(newTheme);
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setCurrentTheme(newTheme);
     localStorage.setItem('theme', newTheme);
-  };
 
-  const applyTheme = (theme: 'light' | 'dark') => {
-    const root = document.documentElement;
-    if (theme === 'dark') {
-      root.setAttribute('data-theme', 'dark');
-    } else {
-      root.removeAttribute('data-theme');
-    }
+    // This is where you would toggle the theme in your ThemeContext
+    // but this will depend on how you implement theme switching with styled-components
   };
 
   return (
-    <button
-      onClick={toggleTheme}
-      className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors cursor-pointer shadow-sm"
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
-    >
-      {theme === 'light' ? (
-        <MoonIcon size={20} className="text-gray-800" />
+    <ThemeToggleButton onClick={toggleTheme} aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} theme`}>
+      {currentTheme === 'light' ? (
+        <MoonIcon size={20} style={{ color: themeContext.gray[800] }} />
       ) : (
-        <SunIcon size={20} className="text-black" />
+        <SunIcon size={20} style={{ color: 'black' }} />
       )}
-    </button>
+    </ThemeToggleButton>
   );
 }

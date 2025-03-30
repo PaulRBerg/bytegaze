@@ -1,6 +1,4 @@
-@import "tailwindcss";
-
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
   --card-bg: #f9fafb;
@@ -25,7 +23,7 @@ body {
   color: var(--foreground);
   transition: background 0.3s ease, color 0.3s ease;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
-}
+} */
 
 /* ONLY LIGHT MODE */
 
