@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ByteGaze
 
-## Getting Started
+**Ethereum ABI Data Visualizer**
 
-First, run the development server:
+ByteGaze is a tool for visualizing Ethereum ABI-encoded data and method call payloads. It helps developers debug smart contract interactions by automatically detecting 4-byte function selectors and splitting the remaining data into 32-byte chunks for easier analysis. It can also be used for decoding ABI data without selectors.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+![ByteGaze Screenshot](https://via.placeholder.com/800x450)
+
+## Features
+
+- Clean visualization of EVM words (32-byte chunks)
+- Automatic detection of function selectors
+- One-click copying of selectors and individual chunks
+- Dark mode support
+- Responsive design for all devices
+- Clear error messages for invalid inputs
+
+## Usage
+
+1. Paste your Ethereum transaction data or method call payload
+2. ByteGaze automatically parses the input and displays:
+    - The function selector (if present)
+    - Data chunks in 32-byte segments
+3. Click on any selector or chunk to copy it to your clipboard
+
+## Development
+
+### Install dependencies
+
+```sh
+bun install
+```
+
+### Run development server
+
+```sh
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Build for production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+bun run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Check code with Biome
 
-## Learn More
+```sh
+bun run check
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Fix code with Biome
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sh
+bun run fix
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Format code with Biome
 
-## Deploy on Vercel
+```sh
+bun run format
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under MIT.
