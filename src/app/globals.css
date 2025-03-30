@@ -3,6 +3,35 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --card-bg: #f9fafb;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --ring-color: rgba(79, 70, 229, 0.2);
+}
+
+:root[data-theme="dark"] {
+  --background: #1e1e2e;
+  --foreground: #e5e7eb;
+  --card-bg: #2a2a3c;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --primary: #6366f1;
+  --primary-hover: #818cf8;
+  --ring-color: rgba(99, 102, 241, 0.2);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  transition: background 0.3s ease, color 0.3s ease;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+/* ONLY LIGHT MODE */
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
 @theme inline {
@@ -12,15 +41,8 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
