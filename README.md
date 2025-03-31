@@ -4,7 +4,7 @@
 
 ByteGaze is a tool for visualizing Ethereum ABI-encoded data and method call payloads. It helps developers debug smart contract interactions by automatically detecting 4-byte function selectors and splitting the remaining data into 32-byte chunks for easier analysis. It can also be used for decoding ABI data without selectors.
 
-![ByteGaze Screenshot](https://via.placeholder.com/800x450)
+![ByteGaze Screenshot](https://bytegaze.vercel.app/screenshot.jpg)
 
 ## Features
 
@@ -16,6 +16,8 @@ ByteGaze is a tool for visualizing Ethereum ABI-encoded data and method call pay
 - Clear error messages for invalid inputs
 
 ## Usage
+
+Check out the [ByteGaze website](https://bytegaze.vercel.app) to start using the tool.
 
 1. Paste your Ethereum transaction data or method call payload
 2. ByteGaze automatically parses the input and displays:
