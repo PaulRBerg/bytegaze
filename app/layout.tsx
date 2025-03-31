@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const BASE_URL = "https://bytegaze.vercel.app";
+
 export const metadata: Metadata = {
   title: "ByteGaze | Ethereum ABI Visualizer",
   description:
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  metadataBase: new URL("https://bytegaze.vercel.app"),
+  metadataBase: new URL(BASE_URL),
 
   // Icons
   icons: {
@@ -36,10 +38,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ByteGaze | Ethereum ABI Visualizer",
     description: "Visualize Ethereum ABI-encoded data in a human-readable format",
+    images: [
+      {
+        url: `${BASE_URL}/opengraph-image.png`,
+        width: 1600,
+        height: 840,
+        alt: "ByteGaze - Ethereum ABI Visualizer",
+      },
+    ],
     locale: "en_US",
     siteName: "ByteGaze",
     type: "website",
-    url: "https://bytegaze.vercel.app",
+    url: BASE_URL,
   },
 
   // Robots
@@ -59,6 +69,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: "@PaulRBerg",
     description: "Visualize Ethereum ABI-encoded data in a human-readable format",
+    images: [`${BASE_URL}/twitter-image.png`],
     title: "ByteGaze | Ethereum ABI Visualizer",
   },
 };
