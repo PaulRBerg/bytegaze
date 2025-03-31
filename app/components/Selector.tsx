@@ -7,11 +7,7 @@ interface SelectorProps {
   setCopiedIndex: (index: number | null) => void;
 }
 
-export default function Selector({
-  selector,
-  copiedIndex,
-  setCopiedIndex,
-}: SelectorProps) {
+export default function Selector({ selector, copiedIndex, setCopiedIndex }: SelectorProps) {
   if (!selector) {
     return null;
   }
@@ -33,19 +29,11 @@ export default function Selector({
       transition={{ duration: 0.3 }}
     >
       <div className="flex gap-2 items-start">
-        <span className="shrink-0 text-gray-700 dark:text-gray-300">
-          Selector:
-        </span>
+        <span className="shrink-0 text-gray-700 dark:text-gray-300">Selector:</span>
         <div className="flex flex-grow items-start relative">
-          <span className="font-mono pr-8 text-violet-700 dark:text-violet-400">
-            {selector}
-          </span>
+          <span className="font-mono pr-8 text-violet-700 dark:text-violet-400">{selector}</span>
           <div className="absolute p-1 right-0 text-gray-500 top-[-2px]">
-            {copiedIndex === -1 ? (
-              <Check size={18} className="text-black dark:text-white" />
-            ) : (
-              <Copy size={18} />
-            )}
+            {copiedIndex === -1 ? <Check size={18} className="text-black dark:text-white" /> : <Copy size={18} />}
           </div>
         </div>
       </div>

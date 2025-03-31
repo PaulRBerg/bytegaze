@@ -5,12 +5,7 @@ interface LinkProps {
 
 function Link({ href, children }: LinkProps) {
   return (
-    <a
-      className="hover:underline text-primary transition-colors"
-      href={href}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
+    <a className="hover:underline text-primary transition-colors" href={href} rel="noopener noreferrer" target="_blank">
       {children}
     </a>
   );
@@ -26,9 +21,7 @@ export default function Footer() {
         <div className="flex space-x-6">
           <Link href="https://github.com/PaulRBerg/bytegaze">Source Code</Link>
           <Link href="https://bia.is/tools/abi-decoder/">ABI Decoder</Link>
-          <Link href="https://docs.soliditylang.org/en/develop/abi-spec.html">
-            ABI Spec
-          </Link>
+          <Link href="https://docs.soliditylang.org/en/develop/abi-spec.html">ABI Spec</Link>
           <Link href="https://buymeacoffee.com/prberg">Buy Me a Coffee</Link>
         </div>
       </div>

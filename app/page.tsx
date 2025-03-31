@@ -37,14 +37,11 @@ export default function Home() {
   // Parse calldata using the hook
   const { chunks, selector, error } = useDataParser(processedInput);
 
-  const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newValue = e.target.value.trim();
-      setInput(newValue);
-      setProcessedInput(newValue); // Update processed input immediately when input changes
-    },
-    [],
-  );
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value.trim();
+    setInput(newValue);
+    setProcessedInput(newValue); // Update processed input immediately when input changes
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -65,21 +62,12 @@ export default function Home() {
 
         <div className="space-y-2">
           {/* No data message */}
-          {!error &&
-            selector === null &&
-            chunks.length === 0 &&
-            processedInput && (
-              <div className="p-4 text-center text-gray-500 dark:text-gray-400 text-gray">
-                Invalid ABI data
-              </div>
-            )}
+          {!error && selector === null && chunks.length === 0 && processedInput && (
+            <div className="p-4 text-center text-gray-500 dark:text-gray-400 text-gray">Invalid ABI data</div>
+          )}
 
           <AnimatePresence>
-            <Selector
-              selector={selector}
-              copiedIndex={copiedIndex}
-              setCopiedIndex={setCopiedIndex}
-            />
+            <Selector selector={selector} copiedIndex={copiedIndex} setCopiedIndex={setCopiedIndex} />
             {chunks.map((chunk, index) => (
               <Chunk
                 chunk={chunk}
