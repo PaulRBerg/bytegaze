@@ -1,16 +1,13 @@
 # Directories
-.vercel
+/.vercel/
 /.next/
-/build
-/node_modules
+/build/
+/node_modules/
 /out/
 
 # Files
-.DS_Store
-.env*
-.pnpm-debug.log*
+*.env*
+*.log*
 *.tsbuildinfo
+.DS_Store
 next-env.d.ts
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
