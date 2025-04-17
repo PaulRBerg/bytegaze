@@ -20,12 +20,10 @@
     "vercel": "^41.4"
   },
   "scripts": {
-    "dev": "next dev",
+    "biome:check": "biome check .",
+    "biome:write": "biome check --write .",
     "build": "next build",
-    "check": "biome check .",
-    "fix": "biome check --write .",
-    "format": "biome format --write .",
-    "lint": "biome lint .",
+    "dev": "next dev",
     "start": "next start"
   }
 }

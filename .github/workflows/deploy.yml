@@ -21,13 +21,6 @@ jobs:
       - name: "Check out the repo"
         uses: "actions/checkout@v4"
 
-      - name: "Cache Node.js modules"
-        uses: "actions/cache@v4"
-        with:
-          path: |
-            ~/.bun/install/cache
-          key: bun-${{ hashFiles('**/bun.lockb') }}
-
       - name: "Install Bun"
         uses: "oven-sh/setup-bun@v2"
         with:
@@ -37,7 +30,7 @@ jobs:
         run: "bun install --frozen-lockfile"
 
       - name: "Check code with Biome"
-        run: "bun run check"
+        run: "bun run biome ci ."
 
       - name: "Pull Vercel environment"
         run: "yarn vercel pull --environment=production --token=$VERCEL_TOKEN --yes"
