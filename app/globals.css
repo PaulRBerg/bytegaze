@@ -13,13 +13,11 @@
   }
 }
 
-/* @theme {
-  --font-mono
-} */
-
 body {
   background: var(--background);
   color: var(--foreground);
-  transition: background 0.25s ease, color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
   font-family: var(--font-sans);
 }

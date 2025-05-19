@@ -3,25 +3,27 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "framer-motion": "^12.6",
-    "lucide-react": "^0.485",
+    "framer-motion": "^12.12",
+    "lucide-react": "^0.511",
     "next": "~15.2",
     "react": "~19.1",
     "react-dom": "~19.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "~20",
-    "@types/react": "~19",
-    "@types/react-dom": "~19",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "vercel": "^41.4"
+    "@biomejs/biome": "2.0.0-beta.4",
+    "@sablier/configs": "github:sablier-labs/configs",
+    "@tailwindcss/postcss": "^4.1",
+    "@types/node": "~20.17",
+    "@types/react": "~19.1",
+    "@types/react-dom": "~19.1",
+    "tailwindcss": "^4.1",
+    "typescript": "^5.8",
+    "vercel": "^41.7"
   },
   "scripts": {
     "biome:check": "biome check .",
-    "biome:write": "biome check --write .",
+    "biome:write": "biome check --write . && bun run biome:write:imports",
+    "biome:write:imports": "biome lint --write --only correctness/noUnusedImports .",
     "build": "next build",
     "dev": "next dev",
     "start": "next start"

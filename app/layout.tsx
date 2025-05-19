@@ -4,11 +4,15 @@ import "./globals.css";
 const BASE_URL = "https://bytegaze.vercel.app";
 
 export const metadata: Metadata = {
-  title: "ByteGaze | Ethereum ABI Visualizer",
+  alternates: {
+    canonical: "/",
+  },
+  authors: [{ name: "Paul Berg" }],
   description:
     "Visualize Ethereum ABI-encoded data in a human-readable format. Debug smart contract interactions and inspect transaction data.",
-
-  // Basic metadata
+  icons: {
+    icon: "/favicon.ico",
+  },
   keywords: [
     "abi",
     "blockchain",
@@ -21,38 +25,23 @@ export const metadata: Metadata = {
     "visualizer",
     "web3",
   ],
-  authors: [{ name: "Paul Berg" }],
-
-  // Canonical URL
-  alternates: {
-    canonical: "/",
-  },
   metadataBase: new URL(BASE_URL),
-
-  // Icons
-  icons: {
-    icon: "/favicon.ico",
-  },
-
-  // Open Graph protocol for social media
   openGraph: {
-    title: "ByteGaze | Ethereum ABI Visualizer",
     description: "Visualize Ethereum ABI-encoded data in a human-readable format",
     images: [
       {
+        alt: "ByteGaze - Ethereum ABI Visualizer",
+        height: 840,
         url: `${BASE_URL}/opengraph-image.png`,
         width: 1600,
-        height: 840,
-        alt: "ByteGaze - Ethereum ABI Visualizer",
       },
     ],
     locale: "en_US",
     siteName: "ByteGaze",
+    title: "ByteGaze | Ethereum ABI Visualizer",
     type: "website",
     url: BASE_URL,
   },
-
-  // Robots
   robots: {
     follow: true,
     googleBot: {
@@ -63,8 +52,7 @@ export const metadata: Metadata = {
     },
     index: true,
   },
-
-  // Twitter card
+  title: "ByteGaze | Ethereum ABI Visualizer",
   twitter: {
     card: "summary_large_image",
     creator: "@PaulRBerg",

@@ -33,15 +33,15 @@ jobs:
         run: "bun run biome ci ."
 
       - name: "Pull Vercel environment"
-        run: "yarn vercel pull --environment=production --token=$VERCEL_TOKEN --yes"
+        run: "bun run vercel pull --environment=production --token=$VERCEL_TOKEN --yes"
 
       - name: "Build app using Vercel"
         env:
           NEXT_TELEMETRY_DISABLED: true
-        run: "yarn vercel build --prod --token=$VERCEL_TOKEN"
+        run: "bun run vercel build --prod --token=$VERCEL_TOKEN"
 
       - name: "Deploy app to Vercel"
-        run: "yarn vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN"
+        run: "bun run vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN"
 
       - name: "Add summary"
         run: |

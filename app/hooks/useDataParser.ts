@@ -66,8 +66,8 @@ export function useDataParser(processedInput: string): CalldataParserResult {
           setSelector(null);
           setChunks([]);
           setError({
-            type: ErrorType.FORMAT_ERROR,
             currentLength: cleaned.length / 2,
+            type: ErrorType.FORMAT_ERROR,
           });
         }
       }
@@ -81,8 +81,8 @@ export function useDataParser(processedInput: string): CalldataParserResult {
       setSelector(null);
       setChunks([]);
       setError({
-        type: ErrorType.TOO_SHORT,
         message: "Input too short. Ethereum calldata should be at least 4 bytes (8 hex chars) for a selector.",
+        type: ErrorType.TOO_SHORT,
       });
     } else if (cleaned.length % 64 === 0) {
       // Valid raw EVM words without function selector
@@ -99,11 +99,11 @@ export function useDataParser(processedInput: string): CalldataParserResult {
       setSelector(null);
       setChunks([]);
       setError({
-        type: ErrorType.INVALID_LENGTH,
         message: `Input length must be a multiple of 64 characters (32 bytes) for raw EVM words. Current length: ${cleaned.length}`,
+        type: ErrorType.INVALID_LENGTH,
       });
     }
   }, [processedInput]);
 
-  return { selector, chunks, error };
+  return { chunks, error, selector };
 }

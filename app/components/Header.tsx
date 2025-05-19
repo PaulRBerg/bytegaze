@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface HeaderProps {
   showExtendedDescription?: boolean;
 }
@@ -6,7 +8,7 @@ export default function Header({ showExtendedDescription = false }: HeaderProps)
   return (
     <header className="mb-12 text-center">
       <div className="flex items-center justify-center mb-2">
-        <img alt="ByteGaze Logo" className="h-9 mr-2 mt-1 inline-block w-9" src="/icon.svg" />
+        <Image alt="ByteGaze Logo" className="h-9 mr-2 mt-1 inline-block w-9" src="/icon.svg" />
         <h1 className="bg-clip-text bg-gradient-to-r font-bold from-purple-600 text-4xl text-transparent to-blue-600 inline-flex items-center">
           ByteGaze
         </h1>
