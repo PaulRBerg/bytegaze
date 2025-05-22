@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.0-beta.4",
-    "@sablier/configs": "github:sablier-labs/configs",
+    "@sablier/devkit": "github:sablier-labs/devkit",
     "@tailwindcss/postcss": "^4.1",
     "@types/node": "~20.17",
     "@types/react": "~19.1",

@@ -1,4 +1,4 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["@sablier/configs/biome"]
+  "extends": ["@sablier/devkit/biome"]
 }

@@ -4,6 +4,7 @@
     "": {
       "name": "bytegaze",
       "dependencies": {
+        "@sablier/devkit": "github:sablier-labs/devkit",
         "framer-motion": "^12.12",
         "lucide-react": "^0.511",
         "next": "~15.2",
@@ -12,7 +13,6 @@
       },
       "devDependencies": {
         "@biomejs/biome": "2.0.0-beta.4",
-        "@sablier/configs": "github:sablier-labs/configs",
         "@tailwindcss/postcss": "^4.1",
         "@types/node": "~20.17",
         "@types/react": "~19.1",
@@ -144,7 +144,7 @@
 
     "@rollup/pluginutils": ["@rollup/pluginutils@5.1.4", "", { "dependencies": { "@types/estree": "^1.0.0", "estree-walker": "^2.0.2", "picomatch": "^4.0.2" }, "peerDependencies": { "rollup": "^1.20.0||^2.0.0||^3.0.0||^4.0.0" }, "optionalPeers": ["rollup"] }, "sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ=="],
 
-    "@sablier/configs": ["@sablier/configs@github:sablier-labs/configs#e086b68", {}, "sablier-labs-configs-e086b68"],
+    "@sablier/devkit": ["@sablier/devkit@github:sablier-labs/devkit#0bbb7d7", {}, "sablier-labs-devkit-0bbb7d7"],
 
     "@sinclair/typebox": ["@sinclair/typebox@0.25.24", "", {}, "sha512-XJfwUVUKDHF5ugKwIcxEgc9k8b7HbznCp6eUfWgu710hMPNIO4aw4/zB5RogDQz8nd6gyCDpU9O/m6qYEWY6yQ=="],
 
