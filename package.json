@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "framer-motion": "^12.12",
+    "framer-motion": "^12.19",
     "lucide-react": "^0.511",
-    "next": "~15.2",
+    "next": "~15.3",
     "react": "~19.1",
     "react-dom": "~19.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.0-beta.4",
+    "@biomejs/biome": "^2.0",
     "@sablier/devkit": "github:sablier-labs/devkit",
     "@tailwindcss/postcss": "^4.1",
     "@types/node": "~20.17",
@@ -18,7 +18,7 @@
     "@types/react-dom": "~19.1",
     "tailwindcss": "^4.1",
     "typescript": "^5.8",
-    "vercel": "^41.7"
+    "vercel": "^44.2"
   },
   "scripts": {
     "biome:check": "biome check .",
