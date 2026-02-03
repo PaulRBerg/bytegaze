@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { Check, Copy } from "lucide-react";
 
-interface SelectorProps {
+type SelectorProps = {
   selector: string | null;
   copiedIndex: number | null;
   setCopiedIndex: (index: number | null) => void;
-}
+};
 
 export default function Selector({ selector, copiedIndex, setCopiedIndex }: SelectorProps) {
   if (!selector) {
@@ -15,7 +15,7 @@ export default function Selector({ selector, copiedIndex, setCopiedIndex }: Sele
   return (
     <motion.div
       animate={{ opacity: 1, y: 0 }}
-      className="bg-violet-100/90 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800/40 break-all cursor-pointer hover:shadow p-3 rounded-lg shadow-sm text-sm transition-shadow"
+      className="cursor-pointer break-all rounded-lg border border-violet-200 bg-violet-100/90 p-3 text-sm shadow-sm transition-shadow hover:shadow dark:border-violet-800/40 dark:bg-violet-900/20"
       exit={{ opacity: 0, y: -20 }}
       initial={{ opacity: 0, y: 20 }}
       key="selector"
@@ -28,12 +28,16 @@ export default function Selector({ selector, copiedIndex, setCopiedIndex }: Sele
       }}
       transition={{ duration: 0.3 }}
     >
-      <div className="flex gap-2 items-start">
+      <div className="flex items-start gap-2">
         <span className="shrink-0 text-gray-700 dark:text-gray-300">Selector:</span>
-        <div className="flex flex-grow items-start relative">
-          <span className="font-mono pr-8 text-violet-700 dark:text-violet-400">{selector}</span>
-          <div className="absolute p-1 right-0 text-gray-500 top-[-2px]">
-            {copiedIndex === -1 ? <Check size={18} className="text-black dark:text-white" /> : <Copy size={18} />}
+        <div className="relative flex flex-grow items-start">
+          <span className="pr-8 font-mono text-violet-700 dark:text-violet-400">{selector}</span>
+          <div className="absolute top-[-2px] right-0 p-1 text-gray-500">
+            {copiedIndex === -1 ? (
+              <Check className="text-black dark:text-white" size={18} />
+            ) : (
+              <Copy size={18} />
+            )}
           </div>
         </div>
       </div>

@@ -1,13 +1,18 @@
 import type React from "react";
 
-interface LinkProps {
+type LinkProps = {
   href: string;
   children: React.ReactNode;
-}
+};
 
 function Link({ href, children }: LinkProps) {
   return (
-    <a className="hover:underline text-primary transition-colors" href={href} rel="noopener noreferrer" target="_blank">
+    <a
+      className="text-primary transition-colors hover:underline"
+      href={href}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
       {children}
     </a>
   );
@@ -15,12 +20,12 @@ function Link({ href, children }: LinkProps) {
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 dark:border-gray-700 py-6 w-full">
-      <div className="container flex flex-col md:flex-row items-center justify-center md:justify-between mx-auto px-4 text-gray-500 dark:text-gray-400 text-sm">
+    <footer className="w-full border-gray-200 border-t py-6 dark:border-gray-700">
+      <div className="container mx-auto flex flex-col items-center justify-center px-4 text-gray-500 text-sm md:flex-row md:justify-between dark:text-gray-400">
         <div className="hidden md:block">
           Created by <Link href="https://x.com/PaulRBerg">Paul Berg</Link>
         </div>
-        <div className="flex space-x-6 justify-center w-full md:w-auto">
+        <div className="flex w-full justify-center space-x-6 md:w-auto">
           <Link href="https://github.com/PaulRBerg/bytegaze">Source Code</Link>
           <span className="hidden md:block">
             <Link href="https://bia.is/tools/abi-decoder/">ABI Decoder</Link>

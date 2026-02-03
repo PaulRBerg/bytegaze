@@ -1,18 +1,18 @@
 import { motion } from "framer-motion";
 import { Check, Copy } from "lucide-react";
 
-interface ChunkProps {
+type ChunkProps = {
   chunk: string;
   copiedIndex: number | null;
   index: number;
   setCopiedIndex: (index: number | null) => void;
-}
+};
 
 export default function Chunk({ chunk, copiedIndex, index, setCopiedIndex }: ChunkProps) {
   return (
     <motion.div
       animate={{ opacity: 1, y: 0 }}
-      className="dark:bg-emerald-950 border border-gray-300 dark:border-gray-700 break-all cursor-pointer hover:shadow p-3 rounded-lg shadow-sm text-sm transition-shadow"
+      className="cursor-pointer break-all rounded-lg border border-gray-300 p-3 text-sm shadow-sm transition-shadow hover:shadow dark:border-gray-700 dark:bg-emerald-950"
       exit={{ opacity: 0, y: -20 }}
       initial={{ opacity: 0, y: 20 }}
       onClick={() => {
@@ -24,12 +24,20 @@ export default function Chunk({ chunk, copiedIndex, index, setCopiedIndex }: Chu
       }}
       transition={{ delay: index * 0.05, duration: 0.3 }}
     >
-      <div className="flex gap-2 items-start">
-        <span className="shrink-0 text-gray-500 dark:text-gray-400 w-20 whitespace-nowrap">Chunk {index}:</span>
-        <div className="flex flex-grow items-start relative">
-          <span className="break-all font-mono pr-8 text-emerald-600 dark:text-emerald-400">{chunk}</span>
-          <div className="absolute p-1 right-0 text-gray-500 top-[-2px]">
-            {copiedIndex === index ? <Check size={18} className="text-black dark:text-white" /> : <Copy size={18} />}
+      <div className="flex items-start gap-2">
+        <span className="w-20 shrink-0 whitespace-nowrap text-gray-500 dark:text-gray-400">
+          Chunk {index}:
+        </span>
+        <div className="relative flex flex-grow items-start">
+          <span className="break-all pr-8 font-mono text-emerald-600 dark:text-emerald-400">
+            {chunk}
+          </span>
+          <div className="absolute top-[-2px] right-0 p-1 text-gray-500">
+            {copiedIndex === index ? (
+              <Check className="text-black dark:text-white" size={18} />
+            ) : (
+              <Copy size={18} />
+            )}
           </div>
         </div>
       </div>

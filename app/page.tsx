@@ -44,13 +44,13 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="container flex-grow max-w-4xl mx-auto px-4 py-16">
+    <div className="flex min-h-screen flex-col">
+      <main className="container mx-auto max-w-4xl flex-grow px-4 py-16">
         <Header showExtendedDescription={true} />
 
         <div className="mb-8">
           <input
-            className="dark:bg-gray-700/80 border border-gray-200 dark:border-gray-600 focus:border-blue-300 dark:focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 font-mono p-3 rounded-lg shadow-sm transition-all w-full"
+            className="w-full rounded-lg border border-gray-200 p-3 font-mono shadow-sm transition-all focus:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:border-gray-600 dark:bg-gray-700/80 dark:focus:border-blue-500"
             onChange={handleInputChange}
             placeholder="Enter ABI-encoded data (0x...)"
             type="text"
@@ -63,11 +63,17 @@ export default function Home() {
         <div className="space-y-2">
           {/* No data message */}
           {!error && selector === null && chunks.length === 0 && processedInput && (
-            <div className="p-4 text-center text-gray-500 dark:text-gray-400 text-gray">Invalid ABI data</div>
+            <div className="p-4 text-center text-gray text-gray-500 dark:text-gray-400">
+              Invalid ABI data
+            </div>
           )}
 
           <AnimatePresence>
-            <Selector selector={selector} copiedIndex={copiedIndex} setCopiedIndex={setCopiedIndex} />
+            <Selector
+              copiedIndex={copiedIndex}
+              selector={selector}
+              setCopiedIndex={setCopiedIndex}
+            />
             {chunks.map((chunk, index) => (
               <Chunk
                 chunk={chunk}

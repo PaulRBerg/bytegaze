@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import { ErrorType } from "../components/ErrorCard";
 
-interface ErrorData {
+type ErrorData = {
   type: ErrorType;
   message?: string;
   currentLength?: number;
-}
+};
 
-interface CalldataParserResult {
+type CalldataParserResult = {
   chunks: string[];
   error: ErrorData | null;
   selector: string | null;
+};
+
+function splitIntoChunks(data: string): string[] {
+  const chunks: string[] = [];
+  for (let i = 0; i < data.length; i += 64) {
+    chunks.push(data.substring(i, i + 64));
+  }
+  return chunks;
 }
 
 export function useDataParser(processedInput: string): CalldataParserResult {
@@ -43,33 +51,21 @@ export function useDataParser(processedInput: string): CalldataParserResult {
         setSelector(potentialSelector);
 
         // Split the rest into 64-character chunks (32-byte words)
-        const newChunks = [];
-        for (let i = 0; i < restOfData.length; i += 64) {
-          newChunks.push(restOfData.substring(i, i + 64));
-        }
-        setChunks(newChunks);
+        setChunks(splitIntoChunks(restOfData));
+        setError(null);
+      } else if (cleaned.length % 64 === 0) {
+        // No valid function selector, but entire cleaned input is valid
+        setSelector(null);
+        setChunks(splitIntoChunks(cleaned));
         setError(null);
       } else {
-        // No valid function selector, check if entire cleaned input is valid
-        if (cleaned.length % 64 === 0) {
-          // Valid without function selector
-          setSelector(null);
-          // Split into 64-character chunks
-          const newChunks = [];
-          for (let i = 0; i < cleaned.length; i += 64) {
-            newChunks.push(cleaned.substring(i, i + 64));
-          }
-          setChunks(newChunks);
-          setError(null);
-        } else {
-          // Invalid format
-          setSelector(null);
-          setChunks([]);
-          setError({
-            currentLength: cleaned.length / 2,
-            type: ErrorType.FORMAT_ERROR,
-          });
-        }
+        // Invalid format
+        setSelector(null);
+        setChunks([]);
+        setError({
+          currentLength: cleaned.length / 2,
+          type: ErrorType.FORMAT_ERROR,
+        });
       }
     } else if (cleaned.length === 0 && hasPrefix) {
       // Just 0x prefix
@@ -81,18 +77,14 @@ export function useDataParser(processedInput: string): CalldataParserResult {
       setSelector(null);
       setChunks([]);
       setError({
-        message: "Input too short. Ethereum calldata should be at least 4 bytes (8 hex chars) for a selector.",
+        message:
+          "Input too short. Ethereum calldata should be at least 4 bytes (8 hex chars) for a selector.",
         type: ErrorType.TOO_SHORT,
       });
     } else if (cleaned.length % 64 === 0) {
       // Valid raw EVM words without function selector
       setSelector(null);
-      // Split into 64-character chunks
-      const newChunks = [];
-      for (let i = 0; i < cleaned.length; i += 64) {
-        newChunks.push(cleaned.substring(i, i + 64));
-      }
-      setChunks(newChunks);
+      setChunks(splitIntoChunks(cleaned));
       setError(null);
     } else {
       // Invalid format
