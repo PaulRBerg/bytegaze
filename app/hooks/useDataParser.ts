@@ -16,7 +16,7 @@ type CalldataParserResult = {
 function splitIntoChunks(data: string): string[] {
   const chunks: string[] = [];
   for (let i = 0; i < data.length; i += 64) {
-    chunks.push(data.substring(i, i + 64));
+    chunks.push(data.slice(i, i + 64));
   }
   return chunks;
 }
@@ -36,14 +36,14 @@ export function useDataParser(processedInput: string): CalldataParserResult {
 
     // Remove 0x prefix if present
     const hasPrefix = processedInput.startsWith("0x");
-    const cleaned = hasPrefix ? processedInput.substring(2) : processedInput;
+    const cleaned = hasPrefix ? processedInput.slice(2) : processedInput;
 
     // Check if we have at least 4 bytes (8 hex chars) for a function selector
     if (cleaned.length >= 8) {
       // Extract potential function selector
-      const potentialSelector = cleaned.substring(0, 8);
+      const potentialSelector = cleaned.slice(0, 8);
       // Rest of the data after selector
-      const restOfData = cleaned.substring(8);
+      const restOfData = cleaned.slice(8);
 
       // Check if the rest of data's length is a multiple of 64 (32 bytes)
       if (restOfData.length % 64 === 0 || restOfData.length === 0) {

@@ -14,10 +14,10 @@
 }
 
 body {
-  background: var(--background);
+  font-family: var(--font-sans);
   color: var(--foreground);
+  background: var(--background);
   transition:
     background 0.25s ease,
     color 0.25s ease;
-  font-family: var(--font-sans);
 }

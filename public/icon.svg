@@ -1,23 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <!-- Gradient definition -->
   <defs>
-    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="gradient" x1="0%" x2="100%" y1="0%" y2="100%">
       <stop offset="0%" stop-color="#8b5cf6" />
       <stop offset="100%" stop-color="#3b82f6" />
     </linearGradient>
   </defs>
-  
+
   <!-- Eye outline -->
-  <path d="M2,32 Q32,-10 62,32 Q32,74 2,32 Z" fill="none" stroke="url(#gradient)" stroke-width="4" />
-  
+  <path
+    d="M2,32 Q32,-10 62,32 Q32,74 2,32 Z"
+    fill="none"
+    stroke="url(#gradient)"
+    stroke-width="4"
+  />
+
   <!-- Pupil with data lines -->
-  <circle cx="32" cy="32" r="12" fill="url(#gradient)" />
-  
+  <circle cx="32" cy="32" fill="url(#gradient)" r="12" />
+
   <!-- Data lines -->
-  <line x1="8" y1="32" x2="20" y2="32" stroke="url(#gradient)" stroke-width="2" />
-  <line x1="44" y1="32" x2="56" y2="32" stroke="url(#gradient)" stroke-width="2" />
-  <line x1="12" y1="22" x2="20" y2="26" stroke="url(#gradient)" stroke-width="2" />
-  <line x1="12" y1="42" x2="20" y2="38" stroke="url(#gradient)" stroke-width="2" />
-  <line x1="52" y1="22" x2="44" y2="26" stroke="url(#gradient)" stroke-width="2" />
-  <line x1="52" y1="42" x2="44" y2="38" stroke="url(#gradient)" stroke-width="2" />
+  <line stroke="url(#gradient)" stroke-width="2" x1="8" x2="20" y1="32" y2="32" />
+  <line stroke="url(#gradient)" stroke-width="2" x1="44" x2="56" y1="32" y2="32" />
+  <line stroke="url(#gradient)" stroke-width="2" x1="12" x2="20" y1="22" y2="26" />
+  <line stroke="url(#gradient)" stroke-width="2" x1="12" x2="20" y1="42" y2="38" />
+  <line stroke="url(#gradient)" stroke-width="2" x1="52" x2="44" y1="22" y2="26" />
+  <line stroke="url(#gradient)" stroke-width="2" x1="52" x2="44" y1="42" y2="38" />
 </svg>

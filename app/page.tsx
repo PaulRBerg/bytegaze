@@ -18,13 +18,13 @@ export default function Home() {
   const [processedInput, setProcessedInput] = useState<string>("");
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
-  const isProd = useMemo(() => {
-    return (
+  const isProd = useMemo(
+    () =>
       process.env.NEXT_PUBLIC_ENVIRONMENT === "production" ||
       process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ||
-      process.env.NEXT_PUBLIC_VERCEL_TARGET_ENV === "production"
-    );
-  }, []);
+      process.env.NEXT_PUBLIC_VERCEL_TARGET_ENV === "production",
+    []
+  );
 
   // Set initial input based on environment
   useEffect(() => {
